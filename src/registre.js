@@ -1,3 +1,4 @@
+
 // Ajouter et lister les observations de sol.
 // Fiche : fiches/3-ajouter-lister.md · Vérifier : npm run test:registre
 import { versNombre } from './outils.js';
@@ -9,7 +10,7 @@ export const HUMIDITES = ['sec', 'intermédiaire', 'humide'];
 // Renvoie une ligne de texte qui décrit l'observation.
 // Exemple : 'S01 | P1 | sableux | pH 5.2 | sec'
 export function formaterObservation(observation) {
-  throw new Error('TODO : coder formaterObservation dans src/registre.js');
+  return `${observation.id} | ${observation.parcelle} | ${observation.texture} | pH ${observation.pH} | ${observation.etatHumidite}`;
 }
 
 // Renvoie un texte avec une observation par ligne (lignes séparées par '\n'),
