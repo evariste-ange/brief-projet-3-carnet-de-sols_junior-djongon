@@ -16,12 +16,16 @@ export function formaterObservation(observation) {
 // Renvoie un texte avec une observation par ligne (lignes séparées par '\n'),
 // ou 'Aucune observation enregistrée.' si la liste est vide.
 export function listerObservations(observations) {
-  throw new Error('TODO : coder listerObservations dans src/registre.js');
+  if( observations.length === 0 ){
+    return 'Aucune observation enregistrée.';
+  } else {
+    return observations.map(formaterObservation).join('\n');
+  }
 }
 
 // Renvoie l'observation qui a cet identifiant de point, ou undefined si elle n'existe pas.
 export function trouverParId(observations, id) {
-  throw new Error('TODO : coder trouverParId dans src/registre.js');
+  return observations.find ( observations => observations.id === id);
 }
 
 // Contrôle une saisie AVANT de l'ajouter. Tous les champs arrivent sous forme de TEXTE :
