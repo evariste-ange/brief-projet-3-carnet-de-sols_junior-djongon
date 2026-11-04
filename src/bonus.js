@@ -28,17 +28,57 @@ export function supprimerObservation(observations, id) {
 // Erreurs : identifiant introuvable · champ 'id' (non modifiable) · champ absent de CHAMPS_MODIFIABLES
 //           · valeur refusée par les règles de l'ajout.
 export function modifierObservation(observations, id, champ, valeur) {
-  throw new Error('TODO Bonus : coder modifierObservation dans src/bonus.js');
+  const erreur =[]
+  const observation = trouverParId(observations, id);
+
+  if (!observation) {
+    erreur.push("Identifiant introuvable");
+    return erreur;
+  }
+  if (champ === "id") {
+    erreur.push("champ 'id' n'est pas modifiable");
+    return erreur;
+  }
+  if (!CHAMPS_MODIFIABLES.includes(champ)) {
+    erreur.push("Ce champ n'est pas pas parmi les champ modifiable autorisés")
+    return erreur;
+  }
+  let valeurTrav = valeur;
+  if(champ === "pH") {
+    valeurTrav = (versNombre(valeur));
+    if (isNaN(valeurTrav) || valeurTrav < 0 || valeurTrav > 14){
+      erreur.push("La valeur du pH doit etre un nombre compris entre 0 et 14");
+    }
+  }
+  if (erreur.length > 0) {
+    return erreur;
+  }
+  observation[champ]=valeurTrav;
+  return[];
 }
 
 // Renvoie une COPIE triée par pH décroissant. Le tableau reçu ne doit pas changer d'ordre.
 export function trierParPhDecroissant(observations) {
-  throw new Error('TODO Bonus : coder trierParPhDecroissant dans src/bonus.js');
+  return [...observations].sort ((a, b) => b.pH-a.pH);
 }
 
 // Renvoie { texture, nombre } pour la texture la plus fréquente, ou null si la liste est vide.
 // En cas d'égalité, la première texture rencontrée l'emporte.
 // Exemple : { texture: 'limoneux', nombre: 4 }
 export function textureLaPlusFrequente(observations) {
-  throw new Error('TODO Bonus : coder textureLaPlusFrequente dans src/bonus.js');
+  //if(!observations || observations.length === 0){ return null }
+  const comptage = compterParTexture(observations);
+  let textureMax = null;
+  let nombreMax = 0;
+  for (const observation of observations){
+    const texture = observation.texture;
+    if(texture && comptage [texture] > nombreMax){
+      nombreMax = comptage [texture];
+      textureMax = texture;
+    }
+  }
+  if(!textureMax){
+      return null;
+  }
+  return { texture: textureMax, nombre: nombreMax}
 }
