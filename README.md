@@ -1,10 +1,11 @@
 # Carnet d'observation des sols
 
-> Projet individuel du SAS DFS, brief 3 (sujet : [SUJET.md](SUJET.md)). Remplacez chaque ✏️ par votre texte, puis supprimez cette ligne.
+> Projet individuel du SAS DFS, brief 3 (sujet : [SUJET.md](SUJET.md)). 
 
 ## Contexte
 
-✏️ *En cinq à huit phrases : qui utilise l'outil (son métier, son geste professionnel), son besoin, ce qu'il saisit, ce que le programme lui affiche, ce que l'outil ne fait pas.*
+Le carnet d'observation des sols est un outil destiné aux agents agricoles et techniciens de terrain qui réalisent des prélèvements d'informations sur des parcelles cultivées afin de constituer un relevé organisé. l'utilisateur saisit l'identifiant de l'observation, la parcelle concernée, la texture du sol, son pH et son état d'humidité. Le programme enregistre ces informations dans un fichier JSON afin de les conserver entre plusieurs utilisations.Il peut donc les manipuler selon le besoin.Il ne diagnostic pas et ne recommande pas de traitement.
+
 
 ## Prérequis et lancement
 
@@ -21,24 +22,29 @@ Sous PowerShell, si `npm` est bloqué : `npm.cmd test`.
 
 ## Fonctionnalités
 
-✏️ *Cochez seulement ce qui marche : `- [x]`.*
-
-- [ ] Données lues et enregistrées dans `donnees/observations.json`
-- [ ] Ajouter une observation, saisies invalides refusées sans arrêter le programme
-- [ ] Lister les observations, message si le carnet est vide
-- [ ] Rechercher par point ou par parcelle ; filtrer par texture
-- [ ] Trier par pH
-- [ ] Synthèse : pH minimum et maximum, nombre par texture, points à discuter (pH < 5,5)
-- [ ] Bonus : supprimer et modifier une observation (choix 6 et 7)
-- [ ] Bonus : tri par pH décroissant, texture la plus fréquente
+- [x] Données lues et enregistrées dans `donnees/observations.json`
+- [x] Ajouter une observation, saisies invalides refusées sans arrêter le programme
+- [x] Lister les observations, message si le carnet est vide
+- [x] Rechercher par point ou par parcelle ; filtrer par texture
+- [x] Trier par pH
+- [x] Synthèse : pH minimum et maximum, nombre par texture, points à discuter (pH < 5,5)
+- [x] Bonus : supprimer et modifier une observation (choix 6 et 7)
+- [x] Bonus : tri par pH décroissant, texture la plus fréquente
 
 ## Données
 
-✏️ *Le fichier, le nombre d'observations, les champs (voir [docs/dictionnaire-donnees.md](docs/dictionnaire-donnees.md)), le pH sans unité. Rappelez qu'elles sont fictives.*
+.\donnees\observations.json
+Nombre total d’observations : 10
+Les champs : id, parcelle, texture, pH, etatHumidite
+Le pH : compris entre 0 et 14 (inclus)
+
+NB : les valeurs utilisées sont fictives.
 
 ## Limites
 
-✏️ *Au moins trois. Par exemple : le carnet repère des valeurs à discuter, mais ne produit aucun diagnostic de fertilisation.*
+1. le carnet fonctionne uniquement en ligne de commande
+2. le carnet ne permet pas de joindre des photos aux observations
+3. le carnet ne permet pas d'exporter les observations pour des analyses 
 
 ## Documents
 
@@ -46,4 +52,8 @@ Sous PowerShell, si `npm` est bloqué : `npm.cmd test`.
 
 ## Auteur
 
-✏️ *Prénom NOM, compte GitHub. Entraide : avec qui, sur quoi.*
+Junior DJONGON, https://github.com/evariste-ange 
+
+Aide : 
+KAMAGATE ABDALA / débogage de l'app 
+KONE FATOUMATA ( classe A ) / aide pour intégré la fonctionnalité modifierObservation à l'app
