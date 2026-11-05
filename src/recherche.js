@@ -21,4 +21,4 @@ export function trierParPh(observations) {
 
 export function trierParPhDecroissant(observations) {
   return observations.toSorted((a, b) => b.pH - a.pH)
-}
+} 
