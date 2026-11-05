@@ -1,12 +1,5 @@
 [
   {
-    "id": "S01",
-    "parcelle": "P1",
-    "texture": "sableux",
-    "pH": 5.2,
-    "etatHumidite": "sec"
-  },
-  {
     "id": "S02",
     "parcelle": "P1",
     "texture": "limoneux",
@@ -68,5 +61,12 @@
     "texture": "limoneux",
     "pH": 6.5,
     "etatHumidite": "intermédiaire"
+  },
+  {
+    "id": "S01",
+    "parcelle": "P1",
+    "texture": "sableux",
+    "pH": 5.2,
+    "etatHumidite": "sec"
   }
 ]

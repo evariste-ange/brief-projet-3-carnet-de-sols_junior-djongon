@@ -18,3 +18,7 @@ export function filtrerParTexture(observations, texture) {
 export function trierParPh(observations) {
   return observations.toSorted((a, b) => a.pH - b.pH)
 }
+
+export function trierParPhDecroissant(observations) {
+  return observations.toSorted((a, b) => b.pH - a.pH)
+}

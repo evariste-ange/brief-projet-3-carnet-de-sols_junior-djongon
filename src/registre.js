@@ -38,7 +38,7 @@ export function trouverParId(observations, id) {
 export function verifierObservation(saisie, observations) {
   const erreur = []
 
-  if (!saisie.id ) {
+  if (!saisie.id) {
     erreur.push("id obligatoire");
   }else {
     for (const obs of observations){
@@ -52,17 +52,21 @@ export function verifierObservation(saisie, observations) {
     erreur.push("La texture doit etre limouneux, sableux ou argileux");
   }
 
-  const p = Number(saisie.pH.replace(',', '.'))
+  const p = versNombre(saisie.pH)
+  if (saisie.pH ==='' || isNaN(p) || p<0 || p>14){
+    erreur.push("Veuillez entrer un pH valide entre 0 et 14")
+  }
+  /*const p = Number(saisie.pH.replace(',', '.'))
   if(saisie.pH ==='' || isNaN(p) || p<0 || p>14){
     erreur.push("Veuillez entrer un pH valide entre 0 et 14");
-  }
+  }*/
 
   if(saisie.parcelle.trim() === ''){
     erreur.push("Veuillez entrer obligatoirement une parcelle valide");
   }
 
   if(!HUMIDITES.includes(saisie.etatHumidite)){
-    erreur.push(`Vous devezentrer une humidité valide: ${HUMIDITES}`);
+    erreur.push(`Vous devez entrer une humidité valide: ${HUMIDITES}`);
   }
 
   return erreur
@@ -89,3 +93,46 @@ export function ajouterObservation(observations, saisie) {
 
   return [] 
 }
+
+/*export async function modifierObservation (observations, id, champ, valeur) {
+  const observation = observations.find (observations => observations.id === id);
+  
+  if(observation === undefined){
+    return ("Observation introuvable");
+  }
+
+  if(champ === "id"){
+    return ("L'ID ne peut pas être modifié");
+  }
+
+  if(
+    champ !== "parcelle" &&
+    champ !== "texture" &&
+    champ !== "pH" &&
+    champ !== "etatHumidite" 
+  ) {
+    return ("champ non autorisé");
+  }
+
+  const nouvelleObservation = {
+    id: observation.id,
+    parcelle: observation.parcelle,
+    texture: observation.texture,
+    pH: observation.pH,
+    etatHumidite: observation.etatHumidite
+  };
+
+  nouvelleObservation(champ)=valeur;
+
+  const erreurs = verifierObservation(nouvelleObservation);
+  if(erreurs.length > 0){
+    return erreurs;
+  }
+
+  if(champ === "pH") {
+    observation(champ) = versNombre(valeur);
+  }else {
+    observation(champ) = valeur
+  }
+
+}*/
