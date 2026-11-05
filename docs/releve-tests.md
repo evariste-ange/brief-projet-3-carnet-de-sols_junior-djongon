@@ -48,11 +48,16 @@ pH : 5.1
 
 | Action | Attendu | Obtenu | Testeur |
 | --- | --- | --- | --- |
-| ✏️ | | | |
-| ✏️ | | | |
-| ✏️ | | | |
-| ✏️ | | | |
-| ✏️ | | | |
-| ✏️ | | | |
+| Ajout d'une observation| Observation ajoutée avec succès | Observation ajoutée avec succès | BENE Axel |
 
-**Sur un autre poste** (`git clone`, `node app.js`, `npm test`, en suivant le README) : ✏️
+| Test d'ajout d'observation avec un pH de 14,1 | ajout refusé. utilisateur doit entrer un pH compris entre 0 et 14 | ajout refusé. utilisateur doit entrer un pH compris entre 0 et 14 | BENE Axe |
+
+| Lister les observations | toutes les infos des différentes observations | toutes les infos des différentes observations | BENE Axe |
+
+| Rechercher une observation inexistante | observation (valeur entrer) introuvable | observation (valeur entrer) introuvable | BENE Axe |
+
+| Trier par pH décroissant| liste décroissante des pH  | iste décroissante des pH  | BENE Axe |
+
+| faire ressorti la synthèse| nombre d'observation, pH min, pH max, Observation par texture, point à discuter, rappels| nombre d'observation, pH min, pH max, Observation par texture, point à discuter, rappels | BENE Axe |
+
+Ces tests ont été réalisés sur un autre ordinateur par un autre étudiant. 
