@@ -9,10 +9,9 @@ import { filtrerParParcelle, filtrerParTexture, trierParPh } from './src/recherc
 import { SEUIL_PH_A_DISCUTER, compterParTexture, phMinMax, pointsADiscuter } from './src/synthese.js';
 
 import {
-  supprimerObservation,
   modifierObservation,
-  trierParPhDecroissant,
-  textureLaPlusFrequente
+  supprimerObservation,
+  trierParPhDecroissant
 } from "./src/bonus.js";
 
 const FICHIER_DONNEES = 'donnees/observations.json';
@@ -43,7 +42,7 @@ async function main() {
       console.log("4. Trier par pH");
       console.log("5. Synthèse des observations");
       console.log("6. Supprimer une observation");
-      //console.log("7. Modifier une observation");
+      console.log("7. Modifier une observation");
       //console.log("8. Afficher la texture la plus fréquente");
       console.log("0. Quitter");
 
@@ -69,12 +68,8 @@ async function main() {
           console.log("--------------------- Trier ---------------------");
           console.log("1. Par pH croissant");
           console.log("2. Par pH décroissant");
-
           const choixTri = await demander("Votre choix : ");
-
-          if (choixTri === null)
-            break;
-
+          if (choixTri === null){break}
           if (choixTri === "1") {
             const resultat = trierParPh(observations);
             console.log(listerObservations(resultat));
@@ -83,8 +78,9 @@ async function main() {
             console.log(listerObservations(resultat2))
           } else {
           console.log("choix inconnu :  retour au menu.");
-          break;
+          
           }
+          break;
 
           case "5" : afficherSynthese();
           break;
@@ -102,27 +98,8 @@ async function main() {
           }
           break;
 
-          /*case "7" : {
-            const id = demander("Identifiant à modifier : ");
-
-            if(id === null) return;
-
-            const champ = await demander("Champ à modifier (parcelle, texture, pH, etatHumidite) : ");
-
-            if(champ === null) return;
-
-            const valeur = await demander("Nouvelle valeur : ");
-            if(valeur === null) return;
-
-            const erreurs = modifierObservation(observations, id, champ, valeur);
-            if (erreurs.length > 0) {
-              console.log(erreurs.join,"\n");
-            } else {
-              await enregistrerJson(FICHIER_DONNEES, observations);
-              console.log("Observation modifiée avec succès.")
-            }
-            break;
-          }*/
+          case "7" : await modifier()
+          break;
 
           case "0" : 
           console.log("Au revoir !");
@@ -188,6 +165,90 @@ async function ajouter() {
   await enregistrerJson(FICHIER_DONNEES, observations);
   console.log("Observation", saisie.id, "ajoutée. Le carnet compte", observations.length, "observations");
 
+}
+
+//fonction modifier une observation
+async function modifier() {
+  console.log("\n--------------------- Ajouter une observation ---------------------");
+  const saisie = await demander("Point à modifier : ");
+  if(saisie === null) return;
+
+  const id = saisie.toUpperCase();
+  const observation =trouverParId(observations, id);
+
+  if(observation === undefined) {
+    console.log("L'observation", id, "est introuvable");
+    return;
+  }
+
+  console.log(formaterObservation(observation, id));
+  console.log("champ à modifier : ");
+  console.log("1. parcelle");
+  console.log("2. texture");
+  console.log("3. pH");
+  console.log("4. Etat d'humidité");
+
+  const choixChamp = await demander("Votre choix : ");
+  if(choixChamp === null) return;
+
+  let champ;
+  let invite;
+  switch(choixChamp) {
+    case "1" : {
+      champ = "parcelle";
+      invite = "Nouvelle parcelle";
+    }
+    break;
+
+    case "2" : {
+      champ = "texture";
+      invite = "Nouvelle texture : ( ", TEXTURES.join(","), ")";
+    }
+    break;
+
+    case "3" : {
+      champ = "pH";
+      invite = "Nouveau pH : ";
+    }
+    break;
+
+    case "4" : {
+      champ = "etatHumidite";
+      invite = "Nouvelle humidité : ( ", HUMIDITES.join(","), ")";
+    }
+    break;
+
+    default : {
+      console.log("choix inconnu : retour au menu");
+    }
+    return;
+  }
+
+  const saisieValeur = await demander(invite);
+  if (saisieValeur === null) {
+  return;
+  }
+  let valeur = saisieValeur;
+  if (champ === "parcelle") {
+    valeur = saisieValeur.toUpperCase();
+  }
+  
+  if (champ === "texture" || champ === "etatHumidite") {
+      valeur = saisieValeur.toUpperCase();
+  }
+
+  const erreurs = modifierObservation(observations, id, champ, valeur);
+  if (erreurs.length > 0) {
+    console.log("Modification refusée")
+
+    for (const erreur of erreurs) {
+      console.log(erreur);
+    }
+  return;
+  }
+
+  await enregistrerJson(FICHIER_DONNEES, observations);
+  console.log("observation", id, "à été modifiée");
 }
 
 //fonction pour rechercher une observation

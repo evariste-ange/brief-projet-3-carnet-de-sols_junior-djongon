@@ -1,7 +1,8 @@
 # Fiche individuelle
 
-> Une page, avant la livraison. Prénom, nom, compte GitHub : ✏️
 
-1. **Une fonction que j'ai écrite**, et comment elle marche : ✏️
-2. **Une difficulté, et sa solution** : ✏️
-3. **L'entraide** (qui m'a aidé, qui j'ai aidé, sur quoi) : ✏️
+1. trierParPhDecroissant,  Elle trie les pH du plus petit au plus grand
+
+2. Erreur de saisie au niveau de la fonction modifierObservation. j'ai corriger en rentrant la bonne variable dans le switch.
+
+3. J'ai reçu l'aide des membres du groupe de personne ayant le brief numéro 3.

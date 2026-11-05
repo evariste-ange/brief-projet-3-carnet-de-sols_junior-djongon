@@ -10,3 +10,4 @@
 6. **Le plan.** Remplissez la colonne « Prévu » de `docs/taches.md` : c'est vous qui organisez vos quatre jours.
 
 **Une expérience pour lire un test rouge :** dans `src/outils.js`, remplacez `return NaN;` par `return 0;`, lancez `npm run test:outils`, lisez le message (`expected` = attendu, `actual` = obtenu), puis annulez avec `git restore src/outils.js`.
+
